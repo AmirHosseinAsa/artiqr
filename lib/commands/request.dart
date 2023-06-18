@@ -1,0 +1,3 @@
+Future<void> generateQRCode() async {
+
+}
