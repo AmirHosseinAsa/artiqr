@@ -20,7 +20,7 @@ class GenerateImageRecordAdapter extends TypeAdapter<GenerateImageRecord> {
       prompt: fields[0] as String,
       content: fields[1] as String,
     )
-      ..url = fields[2] as String?
+      ..fileName = fields[2] as String
       ..generating = fields[3] as bool
       ..CreateDate = fields[4] as DateTime?
       ..isBrandNew = fields[5] as bool?;
@@ -35,7 +35,7 @@ class GenerateImageRecordAdapter extends TypeAdapter<GenerateImageRecord> {
       ..writeByte(1)
       ..write(obj.content)
       ..writeByte(2)
-      ..write(obj.url)
+      ..write(obj.fileName)
       ..writeByte(3)
       ..write(obj.generating)
       ..writeByte(4)

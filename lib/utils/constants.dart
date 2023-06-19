@@ -12,13 +12,13 @@ String contentTextFiledGenerateValue = '';
 
 final spinkitPulse = SpinKitPulse(
   color: Colors.white,
-  size: 100.0,
+  size: 180.0,
 );
 const String version = 'v1.0.0';
 const String mailing =
     'mailto:amirhossein.asa.official@gmail.com?subject=[$AplicationName: (Ver: $version)]';
 
-const String portServ = '7168';
+const String portServ = '7162';
 
 Gradient gradientTheme = LinearGradient(colors: [
   Color(0xff00F5A0),

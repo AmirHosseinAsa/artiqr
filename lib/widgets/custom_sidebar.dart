@@ -20,7 +20,7 @@ class _CustomSideBarState extends State<CustomSideBar> {
   Widget build(BuildContext context) {
     return Container(
       color: background_sidebar,
-      width: MediaQuery.of(context).size.width / 4.8,
+      width: MediaQuery.of(context).size.width / 3.8,
       child: Container(
         margin: const EdgeInsets.all(15),
         child: Column(
@@ -102,7 +102,7 @@ class _CustomSideBarState extends State<CustomSideBar> {
                             showAdvanceSettings
                                 ? Icons.hide_source_rounded
                                 : Icons.panorama_fish_eye,
-                                color: Colors.white,
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -148,6 +148,12 @@ class _CustomSideBarState extends State<CustomSideBar> {
                 height: 15,
               ),
               GenerateButtonWidget(),
+              ValueListenableBuilder<bool>(
+                valueListenable: GenerateButtonWidget.valueNotifier,
+                builder: (BuildContext context, bool value, Widget? child) {
+                  return value ? SizedBox() : Text('Be patient, generating may take multiple minutes');
+                },
+              )
             ] else if (ModalRoute.of(context)?.settings.name == '/history') ...[
               SizedBox(
                 height: 15,

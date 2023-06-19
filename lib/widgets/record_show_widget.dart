@@ -1,8 +1,12 @@
+import 'dart:io';
+
+import 'package:artiqr/commands/io_commands.dart';
+import 'package:artiqr/commands/request.dart';
 import 'package:artiqr/models/generate_image_record.dart';
 import 'package:artiqr/models/generated_image_records_database.dart';
 import 'package:artiqr/utils/constants.dart';
 import 'package:artiqr/widgets/custom_scaffold_message_widget.dart';
-import 'package:artiqr/widgets/save_image_button_widget.dart';
+import 'package:artiqr/widgets/generate_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +22,37 @@ class _RecordShowWidgetState extends State<RecordShowWidget> {
   bool _isLoading = false;
   bool hasError = false;
 
-  Future<void> _fetchResult() async {}
+  Future<void> _fetchResult() async {
+    context
+        .read<GeneratedImageRecordsDatabase>()
+        .updateMakeGenerating(widget.generateImageRecord);
+
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      widget.generateImageRecord.fileName = await generateQRCode(context);
+    } catch (e) {
+      print(e);
+      setState(() {
+        // TO DO REMOVE THIS INSTANCE
+        hasError = true;
+        context
+            .read<GeneratedImageRecordsDatabase>()
+            .remove(widget.generateImageRecord);
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+        if (!hasError) {
+          context
+              .read<GeneratedImageRecordsDatabase>()
+              .update(widget.generateImageRecord);
+        }
+        GenerateButtonWidget.valueNotifier.value = true;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -37,10 +71,10 @@ class _RecordShowWidgetState extends State<RecordShowWidget> {
             children: [
               Flexible(
                 child: Text(
-                  widget.generateImageRecord.prompt,
+                  '${widget.generateImageRecord.content}  |  ${widget.generateImageRecord.prompt}',
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                      fontSize: 24,
+                      fontSize: 22,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
@@ -67,7 +101,7 @@ class _RecordShowWidgetState extends State<RecordShowWidget> {
             ],
           ),
           SizedBox(
-            height: 8,
+            height: 25,
           ),
           _isLoading
               ? Container(
@@ -78,18 +112,8 @@ class _RecordShowWidgetState extends State<RecordShowWidget> {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/loading.gif',
-                        fit: BoxFit.fitHeight,
-                        alignment: Alignment.center,
-                        image: widget.generateImageRecord.url!,
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: -13,
-                      child:
-                          SaveImageButton(url: widget.generateImageRecord.url!),
+                      child: Image.file(File(
+                          '${appDownloadFolder!}/${widget.generateImageRecord.fileName!}')),
                     ),
                   ],
                 ),

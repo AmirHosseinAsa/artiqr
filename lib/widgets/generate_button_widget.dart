@@ -1,10 +1,11 @@
-import 'package:artiqr/widgets/custom_scaffold_message_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:artiqr/utils/constants.dart';
-import 'package:artiqr/models/generate_image_record.dart';
-import 'package:artiqr/models/generated_image_records_database.dart';
 import 'package:provider/provider.dart';
 import 'package:animate_gradient/animate_gradient.dart';
+import '../commands/request.dart';
+import '../models/generate_image_record.dart';
+import '../models/generated_image_records_database.dart';
+import '../utils/constants.dart';
+import 'custom_scaffold_message_widget.dart';
 
 class GenerateButtonWidget extends StatefulWidget {
   const GenerateButtonWidget({Key? key}) : super(key: key);
@@ -56,8 +57,8 @@ class _GenerateButtonWidgetState extends State<GenerateButtonWidget>
 
       context.read<GeneratedImageRecordsDatabase>().add(GenerateImageRecord(
           prompt: promptTextFiledGenerateValue,
-          content: contentTextFiledGenerateValue));
-
+          content: contentTextFiledGenerateValue
+          ));
       GenerateButtonWidget.valueNotifier.value = false;
     } else if (contentTextFiledGenerateValue == '') {
       CustomScaffoldMessageWidget.show(context, 'Please enter youre Content');

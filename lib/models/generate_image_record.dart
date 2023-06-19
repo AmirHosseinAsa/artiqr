@@ -5,12 +5,12 @@ part 'generate_image_record.g.dart';
 class GenerateImageRecord extends HiveObject {
   @HiveField(0)
   late final String prompt;
-  
+
   @HiveField(1)
   late final String content;
 
   @HiveField(2)
-  late String? url;
+  late String fileName = '';
 
   @HiveField(3)
   late bool generating = false;
@@ -21,5 +21,5 @@ class GenerateImageRecord extends HiveObject {
   @HiveField(5)
   late bool? isBrandNew = true;
 
-  GenerateImageRecord({required this.prompt,required this.content});
+  GenerateImageRecord({required this.prompt, required this.content});
 }

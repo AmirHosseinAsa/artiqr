@@ -6,7 +6,6 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
-import 'commands/request.dart';
 import 'models/generated_image_records_database.dart';
 
 void main() async {
@@ -14,7 +13,6 @@ void main() async {
   await WindowManager.instance.ensureInitialized();
   await WidgetsFlutterBinding.ensureInitialized();
   await configureServer();
-  await generateQRCode();
   runApp(
     MultiProvider(
       providers: [

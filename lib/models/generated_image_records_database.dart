@@ -20,7 +20,7 @@ class GeneratedImageRecordsDatabase extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateUrls(GenerateImageRecord record) async {
+  Future<void> update(GenerateImageRecord record) async {
     record.save();
   }
 

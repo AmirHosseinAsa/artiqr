@@ -1,31 +1,63 @@
-import argparse
 from gradio_client import Client
 import random
+from flask import Flask, jsonify, request
+import asyncio
+import os
+import signal
 
-seed = random.uniform(-1, 9999999999)
-# Parse command-line arguments
-parser = argparse.ArgumentParser(description="QR Code AI Art Generator Client")
-parser.add_argument("-qr_code_content","--qr_code_content", type=str, help="QR Code Content")
-parser.add_argument("-prompt","--prompt", type=str, help="Prompt")
-parser.add_argument("-guidance_scale","--guidance_scale", type=float, help="Guidance Scale (between 0.0 and 50.0)")
-parser.add_argument("-controlnet_condition_scale","--controlnet_condition_scale", type=float, help="Controlnet Conditioning Scale (between 0.0 and 5.0)")
-parser.add_argument("-strength","--strength", type=float, help="Strength (between 0.0 and 1.0)")
-args = parser.parse_args()
 
-client = Client("https://huggingface-projects-qr-code-ai-art-generator--77b4rgzlh.hf.space/")
+app = Flask(__name__)
+app.debug = True
 
-result = client.predict(
-    args.qr_code_content,
-    args.prompt,
-    "ugly, disfigured, low quality, blurry, nsfw",
-    args.guidance_scale,
-    args.controlnet_condition_scale,
-    args.strength,
-    seed,
-    "",
-    "",
-    True,
-    "DPM++ Karras SDE",
-    fn_index=0
-)
-print(result)
+@app.route('/', methods=['POST'])
+def index():
+    seed = random.uniform(-1, 9999999999)
+
+    client = Client("https://huggingface-projects-qr-code-ai-art-generator--77b4rgzlh.hf.space/")
+
+
+    result = client.predict(
+        request.headers.get('content'),
+        request.headers.get('prompt'),
+        "ugly, disfigured, low quality, blurry, nsfw",
+        float(request.headers.get('guidance-scale')),
+        float(request.headers.get('controlnet-condition-scale')),
+        float(request.headers.get('strength')),
+        seed,
+        "",
+        "",
+        True,
+        "DPM++ Karras SDE",
+        fn_index=0
+    )
+
+    path = result
+    # Specify the download folder path
+    download_folder = os.path.join(os.path.expanduser("~"), "Downloads", "Artiqr")
+    os.makedirs(download_folder, exist_ok=True)
+
+    # Move the file to the download folder
+    file_name = os.path.basename(path)
+    new_path = os.path.join(download_folder, file_name)
+    os.rename(path, new_path)
+    
+    return jsonify(os.path.basename(new_path))
+
+
+
+async def shutdown_server():
+    pid = os.getpid()
+    os.kill(pid, signal.SIGINT)
+    await asyncio.sleep(0)  # Allow other async tasks to run
+
+@app.route('/shutdown', methods=['GET'])
+async def shutdown():
+    await shutdown_server()
+    return 'Server shutting down...'
+
+@app.route('/status', methods=['GET'])
+def test():
+    return 'online'
+
+if __name__ == "__main__":
+    app.run(debug=True)
