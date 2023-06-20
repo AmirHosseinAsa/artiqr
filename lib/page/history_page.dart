@@ -1,4 +1,5 @@
 import 'package:artiqr/commands/flask.dart';
+import 'package:artiqr/models/advanced_settings_database.dart';
 import 'package:artiqr/utils/constants.dart';
 import 'package:artiqr/widgets/custom_sidebar.dart';
 import 'package:artiqr/widgets/custom_titlebar.dart';
@@ -16,6 +17,7 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> with WindowListener {
   @override
   void onWindowClose() async {
+    await AdvancedSettingsDatabase.update();
     await shutdownServer();
     Navigator.of(context).pop();
     windowManager.destroy();

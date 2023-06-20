@@ -5,7 +5,7 @@ const String AplicationName = "ARTIQR";
 const Color background_container_generated_image = Color(0xff27272A);
 const Color background_sidebar = Color(0xff18181B);
 const Color backgroun_titlebar = Color.fromARGB(255, 20, 20, 20);
-const Color sub_button_color =  Color.fromARGB(255, 139, 74, 243);
+const Color sub_button_color = Color.fromARGB(255, 139, 74, 243);
 
 String promptTextFiledGenerateValue = '';
 String contentTextFiledGenerateValue = '';
@@ -79,7 +79,7 @@ showAlertDialog(
   );
 }
 
-double QR_ControlnetConditioningScale = 1.1;
+double QR_ControlnetConditioningScale = 1.50;
 double QR_Strength = 0.9;
 double QR_GuidanceScale = 7.5;
 bool showAdvanceSettings = true;

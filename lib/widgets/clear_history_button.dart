@@ -1,4 +1,4 @@
-import 'package:artiqr/models/generated_image_records_database.dart';
+import 'package:artiqr/models/generated_image_records_database%20copy.dart';
 import 'package:artiqr/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

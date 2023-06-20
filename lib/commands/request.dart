@@ -19,6 +19,7 @@ Future<String> generateQRCode(BuildContext context) async {
       'guidance-scale': QR_GuidanceScale.toString(),
       'controlnet-condition-scale': QR_ControlnetConditioningScale.toString(),
       'strength': QR_Strength.toString(),
+      'timesRun' : timesRun.toString()
     },
   );
 

@@ -1,4 +1,5 @@
 import 'package:artiqr/commands/flask.dart';
+import 'package:artiqr/models/advanced_settings_database.dart';
 import 'package:artiqr/utils/constants.dart';
 import 'package:artiqr/widgets/custom_sidebar.dart';
 import 'package:artiqr/widgets/custom_titlebar.dart';
@@ -15,6 +16,7 @@ class AboutPage extends StatefulWidget {
 class _AboutPageState extends State<AboutPage> with WindowListener {
   @override
   void onWindowClose() async {
+    await AdvancedSettingsDatabase.update();
     await shutdownServer();
     Navigator.of(context).pop();
     windowManager.destroy();

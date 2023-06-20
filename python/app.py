@@ -9,13 +9,25 @@ import random
 app = Flask(__name__)
 app.debug = True
 
-
+def getSeed(inp):
+    if inp == 0:
+        return random.randint(9000000000, 9999999999)
+    elif inp == 1:
+        return random.randint(1000000000, 5999999999)
+    elif inp == 2:
+        return random.randint(7000000000, 9999999999)
+    elif inp == 3:
+        return random.randint(1000000000, 9999999999)
+    else:
+        return -1
+    
 @app.route('/', methods=['POST'])
 def index():
     try:
         client = Client("https://huggingface-projects-qr-code-ai-art-generator--77b4rgzlh.hf.space/")
 
-        seed = random.randint(8000000000, 9999999999)
+        seed = getSeed(float(request.headers.get('timesRun')))
+        
         result = client.predict(
             request.headers.get('content'),
             request.headers.get('prompt'),

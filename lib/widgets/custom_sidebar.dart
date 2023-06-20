@@ -1,3 +1,4 @@
+import 'package:artiqr/models/advanced_settings_database.dart';
 import 'package:artiqr/utils/constants.dart';
 import 'package:artiqr/widgets/clear_history_button.dart';
 import 'package:artiqr/widgets/custom_slider_widget.dart';

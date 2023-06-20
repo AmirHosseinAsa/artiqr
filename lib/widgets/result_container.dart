@@ -1,5 +1,5 @@
 import 'package:artiqr/models/generate_image_record.dart';
-import 'package:artiqr/models/generated_image_records_database.dart';
+import 'package:artiqr/models/generated_image_records_database%20copy.dart';
 import 'package:artiqr/widgets/record_show_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

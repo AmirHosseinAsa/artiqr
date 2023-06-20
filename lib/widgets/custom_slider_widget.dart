@@ -1,3 +1,4 @@
+import 'package:artiqr/models/advanced_settings_database.dart';
 import 'package:artiqr/utils/constants.dart';
 import 'package:flutter/material.dart';
 

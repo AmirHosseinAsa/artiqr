@@ -1,5 +1,6 @@
 import 'package:artiqr/commands/flask.dart';
-import 'package:artiqr/models/generated_image_records_database.dart';
+import 'package:artiqr/models/advanced_settings_database.dart';
+import 'package:artiqr/models/generated_image_records_database%20copy.dart';
 import 'package:artiqr/utils/constants.dart';
 import 'package:artiqr/widgets/custom_sidebar.dart';
 import 'package:artiqr/widgets/custom_titlebar.dart';
@@ -18,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with WindowListener {
   @override
   void onWindowClose() async {
+    await AdvancedSettingsDatabase.update();
     await shutdownServer();
     Navigator.of(context).pop();
     windowManager.destroy();
