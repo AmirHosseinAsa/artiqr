@@ -1,4 +1,5 @@
 import 'package:artiqr/utils/constants.dart';
+import 'package:artiqr/widgets/clear_history_button.dart';
 import 'package:artiqr/widgets/custom_slider_widget.dart';
 import 'package:artiqr/widgets/generate_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -34,20 +35,34 @@ class _CustomSideBarState extends State<CustomSideBar> {
                 onChanged: (value) => contentTextFiledGenerateValue = value,
                 autocorrect: true,
                 style: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.w500),
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
                 cursorRadius: const Radius.circular(16.0),
-                decoration: const InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          width: 1.5, color: Colors.white38), //<-- SEE HERE
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1.5,
+                      color: Colors.white38,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Colors.white),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 2,
+                      color: Colors.white,
                     ),
-                    contentPadding: EdgeInsets.all(13),
-                    hintStyle: TextStyle(color: Colors.white54),
-                    hintMaxLines: 4,
-                    hintText: 'QR Code Content (url,etc)'),
+                  ),
+                  contentPadding: const EdgeInsets.all(13),
+                  hintStyle: TextStyle(color: Colors.white54),
+                  hintMaxLines: 4,
+                  hintText: 'QR Code Content (url,etc)',
+                  label: Text(
+                    ' Content',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                  floatingLabelBehavior:
+                      FloatingLabelBehavior.always, //<-- ADD THIS LINE
+                ),
               ),
               SizedBox(
                 height: 15,
@@ -73,6 +88,12 @@ class _CustomSideBarState extends State<CustomSideBar> {
                     contentPadding: EdgeInsets.all(13),
                     hintStyle: TextStyle(color: Colors.white54),
                     hintMaxLines: 4,
+                    label: Text(
+                      ' Prompt',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    floatingLabelBehavior:
+                        FloatingLabelBehavior.always, //<-- ADD THIS LINE
                     hintText:
                         'Describe what you want to see (eg. gorgeous abandoned medieval mansion in a fairytale forest)'),
               ),
@@ -151,14 +172,22 @@ class _CustomSideBarState extends State<CustomSideBar> {
               ValueListenableBuilder<bool>(
                 valueListenable: GenerateButtonWidget.valueNotifier,
                 builder: (BuildContext context, bool value, Widget? child) {
-                  return value ? SizedBox() : Text('Be patient, generating may take multiple minutes');
+                  return value
+                      ? SizedBox()
+                      : Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: Text(
+                            'Be patient, generating may take multiple minutes',
+                            style: TextStyle(color: Colors.white60),
+                          ),
+                        );
                 },
               )
             ] else if (ModalRoute.of(context)?.settings.name == '/history') ...[
               SizedBox(
                 height: 15,
               ),
-              // DeleteHistoryWidget(),
+              ClearHistoryWidget(),
             ] else ...[
               Column(
                 children: [

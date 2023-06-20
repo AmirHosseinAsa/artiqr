@@ -57,8 +57,7 @@ class _GenerateButtonWidgetState extends State<GenerateButtonWidget>
 
       context.read<GeneratedImageRecordsDatabase>().add(GenerateImageRecord(
           prompt: promptTextFiledGenerateValue,
-          content: contentTextFiledGenerateValue
-          ));
+          content: contentTextFiledGenerateValue));
       GenerateButtonWidget.valueNotifier.value = false;
     } else if (contentTextFiledGenerateValue == '') {
       CustomScaffoldMessageWidget.show(context, 'Please enter youre Content');
@@ -82,14 +81,14 @@ class _GenerateButtonWidgetState extends State<GenerateButtonWidget>
                   secondaryBegin: Alignment.bottomLeft,
                   secondaryEnd: Alignment.bottomRight,
                   primaryColors: const [
-                    Color.fromARGB(255, 0, 89, 148),
-                    Color.fromARGB(255, 0, 142, 167),
-                    Color.fromARGB(255, 0, 89, 148),
+                    Color.fromARGB(255, 94, 0, 245),
+                    Color.fromARGB(255, 133, 64, 243),
+                    Color.fromARGB(255, 94, 0, 245),
                   ],
                   secondaryColors: const [
-                    Color.fromARGB(255, 0, 89, 148),
-                    Color.fromARGB(255, 0, 142, 167),
-                    Color.fromARGB(255, 0, 89, 148),
+                    Color.fromARGB(255, 94, 0, 245),
+              Color.fromARGB(255, 133, 64, 243),
+                    Color.fromARGB(255, 94, 0, 245),
                   ],
                   controller: _controller,
                   child: ElevatedButton.icon(

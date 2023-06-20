@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 import 'models/generated_image_records_database.dart';
+import 'package:artiqr/commands/io_commands.dart';
 
 void main() async {
   await setupHive();
+  await initializeDownloadPath();
   await WindowManager.instance.ensureInitialized();
   await WidgetsFlutterBinding.ensureInitialized();
   await configureServer();
@@ -24,7 +26,7 @@ void main() async {
 
   doWhenWindowReady(() {
     final win = appWindow;
-    const initialSize = Size(800, 600);
+    const initialSize = Size(1100, 900);
     win.minSize = initialSize;
     win.alignment = Alignment.center;
     win.title = AplicationName;

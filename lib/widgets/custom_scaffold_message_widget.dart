@@ -4,8 +4,7 @@ class CustomScaffoldMessageWidget {
   static void show(BuildContext context, String text) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor:
-            Colors.transparent, 
+        backgroundColor: Colors.transparent,
         duration: Duration(seconds: 3),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
@@ -18,8 +17,8 @@ class CustomScaffoldMessageWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color.fromARGB(255, 0, 52, 87),
-                Color.fromARGB(255, 0, 30, 49),
+                Color.fromARGB(255, 54, 1, 138),
+                Color.fromARGB(255, 31, 0, 80),
               ],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,

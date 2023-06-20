@@ -5,7 +5,7 @@ const String AplicationName = "ARTIQR";
 const Color background_container_generated_image = Color(0xff27272A);
 const Color background_sidebar = Color(0xff18181B);
 const Color backgroun_titlebar = Color.fromARGB(255, 20, 20, 20);
-const Color sub_button_color = Color.fromARGB(255, 0, 123, 180);
+const Color sub_button_color =  Color.fromARGB(255, 139, 74, 243);
 
 String promptTextFiledGenerateValue = '';
 String contentTextFiledGenerateValue = '';
@@ -18,21 +18,21 @@ const String version = 'v1.0.0';
 const String mailing =
     'mailto:amirhossein.asa.official@gmail.com?subject=[$AplicationName: (Ver: $version)]';
 
-const String portServ = '7162';
+const String portServ = '7168';
 
 Gradient gradientTheme = LinearGradient(colors: [
-  Color(0xff00F5A0),
-  Color(0xff0099FF),
+  Color.fromARGB(255, 56, 0, 146),
+  Color.fromARGB(255, 94, 0, 245),
 ]);
 
 Gradient reversedGradientTheme = LinearGradient(colors: [
-  Color(0xff0099FF),
-  Color(0xff00F5A0),
+  Color.fromARGB(255, 189, 148, 255),
+  Color.fromARGB(255, 164, 109, 252),
 ]);
 
 Gradient darkenGradientTheme = LinearGradient(colors: [
-  Color.fromARGB(255, 0, 66, 110),
-  Color.fromARGB(255, 0, 108, 180),
+  Color.fromARGB(255, 56, 0, 146),
+  Color.fromARGB(255, 94, 0, 245),
 ]);
 
 showAlertDialog(

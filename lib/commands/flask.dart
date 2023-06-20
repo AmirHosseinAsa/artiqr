@@ -24,7 +24,7 @@ Future<bool> checkWebsiteStatus() async {
 Future<void> startServer() async {
   try {
     runCmd(ProcessCmd('python -m flask run -p $portServ', [],
-        workingDirectory: 'python'));
+        workingDirectory: 'python',runInShell: true));
   } catch (e) {
     print('Failed to start server: $e');
   }

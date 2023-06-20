@@ -63,8 +63,14 @@ class _RecordShowWidgetState extends State<RecordShowWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+          color: Color.fromARGB(255, 51, 51, 51),
+          borderRadius: BorderRadius.circular(10)),
+      height: MediaQuery.of(context).size.height / 1.28,
+      margin: EdgeInsets.all(10),
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,22 +107,27 @@ class _RecordShowWidgetState extends State<RecordShowWidget> {
             ],
           ),
           SizedBox(
-            height: 25,
+            height: 22,
           ),
-          _isLoading
-              ? Container(
-                  padding: EdgeInsets.all(50),
-                  child: spinkitPulse,
-                )
-              : Stack(
-                  children: [
-                    ClipRRect(
+          Expanded(
+            child: Center(
+              child: _isLoading
+                  ? Container(
+                      padding: EdgeInsets.all(50),
+                      child: spinkitPulse,
+                    )
+                  : ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.file(File(
-                          '${appDownloadFolder!}/${widget.generateImageRecord.fileName!}')),
+                      child: Image.file(
+                          fit: BoxFit.fitHeight,
+                          File(
+                              '${appDownloadFolder!}/${widget.generateImageRecord.fileName}')),
                     ),
-                  ],
-                ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
         ],
       ),
     );

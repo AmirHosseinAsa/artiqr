@@ -42,6 +42,8 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
         Slider(
           value: _scale,
           min: 0,
+          activeColor: sub_button_color,
+          inactiveColor: sub_button_color.withOpacity(.3),
           max: double.parse(QR_INFO['${widget.type}'].toString()),
           label: _scale.toStringAsFixed(2),
           onChanged: (double newValue) {

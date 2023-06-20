@@ -1,6 +1,8 @@
 import 'dart:ui';
 
-import 'package:artiqr/page/main_page.dart';
+import 'package:artiqr/page/about_page.dart';
+import 'package:artiqr/page/history_page.dart';
+import 'package:artiqr/page/home_page.dart';
 import 'package:artiqr/theme/artiqr_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +14,12 @@ class Application extends StatelessWidget {
     return MaterialApp(
       theme: ArtiqrTheme.dark(),
       scrollBehavior: MyCustomScrollBehavior(),
-      home: MainPage(),
+      routes: {
+        '/': (context) => HomePage(),
+        '/history': (context) => HistoryPage(),
+        '/about': (context) => AboutPage(),
+      },
+      initialRoute: '/',
       debugShowCheckedModeBanner: false,
     );
   }
