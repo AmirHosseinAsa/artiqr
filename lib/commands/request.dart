@@ -19,7 +19,7 @@ Future<String> generateQRCode(BuildContext context) async {
       'guidance-scale': QR_GuidanceScale.toString(),
       'controlnet-condition-scale': QR_ControlnetConditioningScale.toString(),
       'strength': QR_Strength.toString(),
-      'timesRun' : timesRun.toString()
+      'timesRun': timesRun.toString()
     },
   );
 
@@ -42,13 +42,6 @@ Future<String> generateQRCode(BuildContext context) async {
       throw Exception('Error: Your prompt has been blocked');
 
     case 401:
-      await shutdownServer();
-      await startServer();
-      await Future.delayed(Duration(milliseconds: 1500));
-      return generateQRCode(context);
-
-    case 502:
-      timesRun++;
       if (timesRun > 3) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -58,6 +51,24 @@ Future<String> generateQRCode(BuildContext context) async {
         timesRun = 0;
         throw Exception('Error: Queue is full! Please try again.');
       } else {
+        timesRun++;
+        await shutdownServer();
+        await startServer();
+        await Future.delayed(Duration(milliseconds: 1500));
+        return generateQRCode(context);
+      }
+
+    case 502:
+      if (timesRun > 3) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: Queue is full! Please try again.'),
+          ),
+        );
+        timesRun = 0;
+        throw Exception('Error: Queue is full! Please try again.');
+      } else {
+        timesRun++;
         return generateQRCode(context);
       }
 

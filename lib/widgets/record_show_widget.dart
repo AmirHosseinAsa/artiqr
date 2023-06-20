@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:artiqr/commands/io_commands.dart';
 import 'package:artiqr/commands/request.dart';
 import 'package:artiqr/models/generate_image_record.dart';
-import 'package:artiqr/models/advanced_settings_database.dart';
 import 'package:artiqr/models/generated_image_records_database%20copy.dart';
 import 'package:artiqr/utils/constants.dart';
 import 'package:artiqr/widgets/custom_scaffold_message_widget.dart';
@@ -52,6 +50,7 @@ class _RecordShowWidgetState extends State<RecordShowWidget> {
         }
         GenerateButtonWidget.valueNotifier.value = true;
       });
+      await playFromAsset('sounds/notif.wav');
     }
   }
 

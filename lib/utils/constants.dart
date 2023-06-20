@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -89,3 +90,8 @@ var QR_INFO = {
   'Strength': '1',
   'GuidanceScale': '50'
 };
+
+AudioPlayer _audioPlayer = AudioPlayer();
+Future<void> playFromAsset(String assetPath) async {
+  await _audioPlayer.play(AssetSource(assetPath));
+}
